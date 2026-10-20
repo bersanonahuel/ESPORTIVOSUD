@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Sintético El Potrero - Reservar Cancha</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- CARTEL DE ESTADO DE CANCHA EN VIVO (LLUVIA / HABILITADA) -->
+  <div id="courtStatusBanner" class="status-banner open">
+    🟢 CANCHA HABILITADA — Se juega normal
+  </div>
+
+  <!-- BARRA SUPERIOR -->
+  <header class="top-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-ball">⚽</div>
+        <div>
+          <div class="brand-title" id="headerClubName">SINTÉTICO EL POTRERO</div>
+          <div class="brand-sub" id="headerClubSub">Cancha Única Techada • Buffet • Parrilla</div>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button type="button" id="headerUserBtn" class="btn-user-account" onclick="openAuthModal()">
+          👤 Mi Cuenta / Mail
+        </button>
+        <a id="headerWhatsappBtn" href="#" target="_blank" rel="noopener" class="btn-whatsapp-top">
+          💬 WhatsApp
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN PRINCIPAL DEL JUGADOR (3 PESTAÑAS GRANDES Y CLARAS) -->
+  <nav class="nav-bar" aria-label="Menú principal">
+    <div class="nav-inner">
+      <button type="button" class="nav-tab active" data-tab="reservar" onclick="switchTab('reservar')">
+        <span class="tab-icon">⚽</span>
+        <span>Reservar Hora</span>
+      </button>
+      <button type="button" class="nav-tab" data-tab="mipartido" onclick="switchTab('mipartido')">
+        <span class="tab-icon">📋</span>
+        <span>Mi Partido <span id="myMatchBadge" class="badge-count" style="display:none;">1</span></span>
+      </button>
+      <button type="button" class="nav-tab" data-tab="faltauno" onclick="switchTab('faltauno')">
+        <span class="tab-icon">🙋‍♂️</span>
+        <span>¿Falta 1? <span id="faltaUnoBadge" class="badge-count">0</span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container">
+    <!-- TARJETA DE CUENTA Y PREMIOS POR FIDELIDAD -->
+    <div id="userLoyaltyStrip"></div>
+
+    <!-- VISTA 1: RESERVAR EN LA CANCHA ÚNICA -->
+    <section id="view-reservar">
+      <!-- PASO 1: DÍA -->
+      <div class="step-section">
+        <div class="step-header">
+          <div class="step-title">
+            <span class="step-number">1</span>
+            <span>¿Qué día juegan?</span>
+          </div>
+        </div>
+        <div id="daysContainer" class="days-grid"></div>
+      </div>
+
+      <!-- PASO 2: HORARIOS DIRECTOS DE LA CANCHA -->
+      <div class="step-section">
+        <div class="step-header">
+          <div class="step-title">
+            <span class="step-number">2</span>
+            <span>Tocá un horario libre (en verde)</span>
+          </div>
+        </div>
+
+        <!-- CALCULADORA RÁPIDA DE CUÁNTO PONE CADA JUGADOR -->
+        <div class="split-bar">
+          <div style="font-weight:900; font-size:0.95rem;">
+            👥 ¿Entre cuántos dividen la cancha hoy?
+          </div>
+          <div id="teamSizePills" class="split-pills"></div>
+        </div>
+
+        <div class="legend-bar">
+          <div class="legend-item"><span class="dot dot-free"></span> LIBRE (Tocar para anotarse)</div>
+          <div class="legend-item"><span class="dot dot-promo"></span> PROMO SIESTA (14 a 17hs más barato)</div>
+          <div class="legend-item"><span class="dot dot-busy"></span> OCUPADO (Avisame si se libera)</div>
+        </div>
+
+        <div id="slotsContainer" class="slots-grid"></div>
+      </div>
+    </section>
+
+    <!-- VISTA 2: MI PARTIDO (PRIVADO DEL JUGADOR O POR CÓDIGO CORTO) -->
+    <section id="view-mipartido" style="display:none;">
+      <div id="miPartidoContainer"></div>
+    </section>
+
+    <!-- VISTA 3: ¿FALTA 1? (BOLSA DE JUGADORES DEL BARRIO) -->
+    <section id="view-faltauno" style="display:none;">
+      <div id="faltaUnoContainer"></div>
+    </section>
+
+    <!-- VISTA 4: PANEL PROTEGIDO DEL DUEÑO / ENCARGADO -->
+    <section id="view-dueno" style="display:none;">
+      <div id="duenoContainer"></div>
+    </section>
+  </main>
+
+  <!-- PIE DE PÁGINA CON ACCESO PROTEGIDO PARA DUEÑO / ENCARGADO -->
+  <footer class="app-footer">
+    <div>⚽ <span id="footerClubName">SINTÉTICO EL POTRERO</span> — Reservas Online 24hs</div>
+    <div>
+      <button type="button" class="btn-secondary" id="footerStaffBtn" onclick="openStaffAccess()">
+        🔐 Acceso Dueño / Encargado
+      </button>
+    </div>
+  </footer>
+
+  <!-- MODAL PARA RESERVAR / REGISTRO CON MAIL / PIN DUEÑO -->
+  <div id="modalRoot" style="display:none;"></div>
+
+  <!-- NOTIFICACIONES GRANDES Y CLARAS -->
+  <div id="toastRoot" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
